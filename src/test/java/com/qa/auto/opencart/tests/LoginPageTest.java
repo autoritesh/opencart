@@ -30,6 +30,7 @@ public class LoginPageTest extends BaseTest {
 	public void forgotPwdLinkTest() {
 		boolean forgotPwdLink = loginPage.isForgotPwdLinkDisplayed();
 		Assert.assertEquals(forgotPwdLink, true);
+		System.out.println("Verify the forgot password test");
 	}
 
 	@Test(priority = 3)

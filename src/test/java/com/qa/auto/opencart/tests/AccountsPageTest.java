@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.qa.auto.opencart.base.BaseTest;
@@ -56,18 +57,23 @@ public class AccountsPageTest extends BaseTest {
 		System.out.println(sectionList);
 	}
 
-	@Test(priority = 5)
-	@Description("Product Search with iMac...")
-	@Severity(SeverityLevel.CRITICAL)
-	public void searchTest_iMac() {
-		Assert.assertTrue(accountsPage.doSearch("iMac"));
+//	@Test(priority = 5)
+//	@Description("Product Search with iMac...")
+//	@Severity(SeverityLevel.CRITICAL)
+//	public void searchTest_iMac() {
+//		Assert.assertTrue(accountsPage.doSearch("iMac"));
+//	}
+
+	@DataProvider
+	public Object[][] getProductName() {
+		return new Object[][] { { "iMac" }, { "MacBook Air" } };
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 5, dataProvider = "getProductName")
 	@Description("Product Search with Macbook Air...")
 	@Severity(SeverityLevel.CRITICAL)
-	public void searchTest_MacBook() {
-		Assert.assertTrue(accountsPage.doSearch("MacBook Air"));
+	public void searchTest_MacBook(String productName) {
+		Assert.assertTrue(accountsPage.doSearch(productName));
 	}
 
 	@Test(priority = 6)
