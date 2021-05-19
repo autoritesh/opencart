@@ -58,8 +58,30 @@ public class DriverFactory {
 
 	public Properties initProp() {
 		prop = new Properties();
+		FileInputStream file = null;
+		String env = System.getProperty("env");
+		LOGGER.info("Current Envionment is " + env);
 		try {
-			FileInputStream file = new FileInputStream("./src/test/resources/config/config.properties");
+			switch (env) {
+			case "qa":
+				file = new FileInputStream("./src/test/resources/config/qa.config.properties");
+				break;
+			case "dev":
+				file = new FileInputStream("./src/test/resources/config/dev.config.properties");
+				break;
+			case "stage":
+				file = new FileInputStream("./src/test/resources/config/stage.config.properties");
+				break;
+			case "prod":
+				file = new FileInputStream("./src/test/resources/config/prod.config.properties");
+				break;
+			default:
+				break;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
 			prop.load(file);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
